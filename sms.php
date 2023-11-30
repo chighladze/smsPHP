@@ -1,7 +1,7 @@
 <?php
 defined('_payments') or die('Error: restricted access');
 
-function disDate($accountBalance, $tariffPrice, $refund=null)
+function disDate($accountBalance, $tariffPrice, $setantaBillDate=null, $refund=null)
 {
     $accountBalance = (float)$accountBalance;
     $tariffPrice = (float)$tariffPrice;
@@ -17,10 +17,12 @@ function disDate($accountBalance, $tariffPrice, $refund=null)
 
     while (!($accountBalance < 0)) {
         $nextDay = date('d-m-Y', strtotime('+1 day', strtotime($date)));
-        echo $nextDay;
         $date = $nextDay;
         $lastDayOfTheMonth = date("t", strtotime($date));
         $accountBalance = $accountBalance - ($tariffPrice / $lastDayOfTheMonth);
+        if($date == $setantaBillDate){
+            $accountBalance = $accountBalance - 5;
+        }
     }
     return $date;
 }
