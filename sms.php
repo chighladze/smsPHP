@@ -13,8 +13,8 @@ function disDate($accountBalance = null, $tariffPrice = null, $setantaBillDate =
             $dateNow = date('Y-m-d', strtotime('+1 day', strtotime($dateNow)));
             if($dateNow == $setantaBillDate){
                 $accountBalance = $accountBalance - 5;
-//                $lastDayOfTheMonth = date("t", strtotime($dateNow));
-//                $accountBalance = $accountBalance - ($tariffPrice / $lastDayOfTheMonth);
+                $lastDayOfTheMonth = date("t", strtotime($dateNow));
+                $accountBalance = $accountBalance - ($tariffPrice / $lastDayOfTheMonth);
             }
         }
         $dateNow = date('Y-m-d', strtotime('-1 day', strtotime($dateNow)));
